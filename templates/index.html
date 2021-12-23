@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Weather Report</title>
+</head>
+<body>
+    <section class="text-gray-400 bg-gray-900 body-font">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+          <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0 mb-10">
+            {% if dict1['temp'][-1] <= 10.0 %}
+            <img class="object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1549389754-8f39dee66026?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNjAxNDd8MHwxfHNlYXJjaHwxfHx3aW50ZXIlMjBkYXJrfGVufDB8Mnx8fDE2NDAyNzY3ODg&ixlib=rb-1.2.1&q=80&w=400">
+            {% elif dict1['temp'][-1] > 10 and dict1['temp'][-1] <= 20 %}
+            <img class="object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1524296283994-25cd19b76fa5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNjAxNDd8MHwxfHNlYXJjaHwyfHxkYXduJTIwc3VucmlzZXxlbnwwfDJ8fHwxNjQwMjc3ODc1&ixlib=rb-1.2.1&q=80&w=400">
+            {% else %}
+            <img class="object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1543306983-a562d8739781?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max">
+            {% endif %}
+          </div>
+          <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Today average temperature will be : {{dict1['temp'][-1]}} ° C</h1>
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Tomorrow average temperature will be : {{dict1['predicted_temperature'][-1]}} ° C</h1>
+            {% if dict1['temp'][-1] <= 10.0 %}
+            <p class="mb-8 leading-relaxed">Today is pretty cold. Make sure to wear warm clothes</p>
+            {% elif dict1['temp'][-1] > 10.0 and dict1['temp'][-1] <= 20.0 %}
+            <p class="mb-8 leading-relaxed">Today temperature is moderate, wear slightly warm clothes. I'll suggest carry an umbrella just in case.</p>
+            {% else %}
+            <p class="mb-8 leading-relaxed">Today temperature will be high. Try wearing light outfits.</p>
+            {% endif %}
+          </div>
+        </div>
+    </section>
+    <p class="text-lg text-center font-bold m-5">Database</p>
+<table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-800 text-gray-200">
+  <tr class="text-left border-b border-gray-300">
+    <th class="px-4 py-3">Date</th>
+    <th class="px-4 py-3">Temperature(°C)</th>
+    <th class="px-4 py-3">Feelslike(°C)</th>
+    <th class="px-4 py-3">Humidity</th>
+    <th class="px-4 py-3">Precipitation</th>
+    <th class="px-4 py-3">Wind-speed</th>
+    <th class="px-4 py-3">Wind-direction</th>
+    <th class="px-4 py-3">Atmosphere Pressure</th>
+    <th class="px-4 py-3">Visibilty</th>
+</tr>
+
+{% for item in list1 %}
+  <tr class="bg-gray-700 border-b border-gray-600">
+    <td class="px-4 py-3">{{dict1['datetime'][item]}}</td>
+    <td class="px-4 py-3">{{dict1['temp'][item]}}</td>
+    <td class="px-4 py-3">{{dict1['feelslike'][item]}}</td>
+    <td class="px-4 py-3">{{dict1['humidity'][item]}}</td>
+    <td class="px-4 py-3">{{dict1['precipitation'][item]}}</td>
+    <td class="px-4 py-3">{{dict1['wind_speed'][item]}}</td>
+    <td class="px-4 py-3">{{dict1['wind_direction'][item]}}</td>
+    <td class="px-4 py-3">{{dict1['pressure'][item]}}</td>
+    <td class="px-4 py-3">{{dict1['visibilty'][item]}}</td>
+  </tr>    
+{% endfor %} 
+<!-- each row -->
+</table>
+
+      
+</body>
+</html>
